@@ -1,7 +1,8 @@
 /*
  * @param haystack string to search in
  * @param keywords range of keywords
- * @returns
+ * @param delimiter delimits keywords found
+ * @returns a string of keywords found joined by delimiter
  */
 function containsAnyKeyword(haystack, keywords, delimiter) {
     var ret = []
