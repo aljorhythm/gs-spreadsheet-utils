@@ -4,23 +4,27 @@
  * @param delimiter delimits keywords found
  * @returns a string of keywords found joined by delimiter
  */
-function containsAnyKeyword(haystack, keywords, delimiter) {
+function extractKeywords(haystack, keywords, delimiter) {
+  if(haystack.map){
+    return haystack.map(extractKeywords)
+  }else{
     var ret = []
-    var delimeter = delimiter ? delimiter : '\n';
+    var delimeter = delimiter ? delimiter : ', ';
     if (typeof haystack == 'undefined') {
-        return ""
+      return ""
     }
     haystack = haystack.toLowerCase()
     keywords.forEach(function(keywordsRow) {
-        keywordsRow.forEach(function(keyword) {
-            if (keyword == "") {
-                return
-            }
-            keyword = keyword.toLowerCase()
-            if (haystack.indexOf(keyword) >= 0) {
-                ret.push(keyword)
-            }
-        })
+      keywordsRow.forEach(function(keyword) {
+        if (keyword == "") {
+          return
+        }
+        keyword = keyword.toLowerCase()
+        if (haystack.indexOf(keyword) >= 0) {
+          ret.push(keyword)
+        }
+      })
     })
-    return ret.join('\n')
+    return ret.join(delimiter)
+  }
 }
